@@ -1,17 +1,17 @@
 <template>
-  <div class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center">
-    <button @click="handleAddUserClick">Add User</button>
+  <div>
+    <div class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center m-6">
+      <button @click="handleAddUserClick">Add User</button>
+    </div>
+    <table-component :records="this.userData"></table-component>
   </div>
   <modal-component ref="modalComponent" @modal-confirm="addUserDetails"></modal-component>
-  <div>
-    <table-component></table-component>
-  </div>
 </template>
 
 <script>
 import ModalComponent from '../components/Exercise2/ModalComponent.vue'
 import TableComponent from '../components/Exercise2/TableComponent.vue'
-
+import { toRaw } from 'vue'
 export default {
   name: 'AboutView',
   props: {},
@@ -21,7 +21,7 @@ export default {
   components: { ModalComponent, TableComponent },
   data() {
     return {
-      data1: ''
+      userData: []
     }
   },
   computed: {},
@@ -31,7 +31,11 @@ export default {
       this.$refs.modalComponent.open()
     },
     addUserDetails(user) {
-      console.log(user)
+      let userObj = toRaw(user)
+      this.userData.push(userObj)
+      console.log(this.userData)
+      // console.log(userObj)
+      // console.log(toRaw(user))
     }
   }
 }

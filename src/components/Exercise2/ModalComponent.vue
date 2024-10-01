@@ -1,7 +1,7 @@
 <template>
   <div v-if="isVisible">
     <div class="fixed inset-0 z-20 flex justify-center items-center text-slate-950">
-      <div class="flex flex-col max-w-5xl rounded-lg shadow-lg bg-white border-cyan-300">
+      <div class="flex flex-col max-w-5xl min-w-96 rounded-lg shadow-lg bg-white border-cyan-300">
         <!-- Modal Header -->
         <div class="p-5">
           <div class="flex justify-between items-start">
@@ -15,7 +15,7 @@
         </div>
         <!-- Modal Body -->
         <div class="p-6">
-          <p>{{ JSON.stringify(formData) }}</p>
+          <!-- <p>{{ JSON.stringify(formData) }}</p> -->
           <form>
             <input
               class="block my-2 border-2 p-2 rounded-lg min-w-40"
@@ -100,6 +100,11 @@ export default {
     confirmModal() {
       this.$emit('modal-confirm', this.formData)
       this.isVisible = false
+      this.formData = this.createEmptyFormData()
+    },
+
+    createEmptyFormData() {
+      return { name: '', email: '', phone: '', address: '', country: '' }
     }
   }
 }
