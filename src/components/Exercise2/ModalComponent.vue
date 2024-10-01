@@ -98,6 +98,7 @@ export default {
       this.isVisible = false
     },
     confirmModal() {
+      this.$emit('modal-confirm', this.formData)
       this.isVisible = false
     }
   }

@@ -2,7 +2,7 @@
   <div class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center">
     <button @click="handleAddUserClick">Add User</button>
   </div>
-  <modal-component ref="modalComponent"></modal-component>
+  <modal-component ref="modalComponent" @modal-confirm="addUserDetails"></modal-component>
   <div>
     <table-component></table-component>
   </div>
@@ -29,6 +29,9 @@ export default {
     handleAddUserClick() {
       console.log()
       this.$refs.modalComponent.open()
+    },
+    addUserDetails(user) {
+      console.log(user)
     }
   }
 }
