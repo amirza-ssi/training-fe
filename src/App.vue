@@ -4,10 +4,10 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
+  <header class="my-20">
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
+    <div>
       <HelloWorld msg="You did it!" />
 
       <nav>
@@ -76,10 +76,10 @@ nav a:first-of-type {
 
   nav {
     text-align: left;
-    margin-left: -1rem;
+    /* margin-left: -1rem; */
     font-size: 1rem;
 
-    padding: 1rem 0;
+    /* padding: 1rem 0; */
     margin-top: 1rem;
   }
 }
