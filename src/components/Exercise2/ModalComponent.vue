@@ -44,6 +44,7 @@
             :options="this.country_options"
             @dropdown-response="(val) => (formData.country = val)"
           ></dropdown-component>
+          <span>{{ formData.country }}</span>
         </div>
 
         <!-- Modal Footer -->
@@ -76,10 +77,10 @@ export default {
   components: { DropdownComponent },
   data() {
     const options = [
-      { id: 1, title: 'Ruby on Rails' },
-      { id: 2, title: 'Vue.js' },
-      { id: 3, title: 'Tailwind CSS' },
-      { id: 4, title: 'Node JS' }
+      { id: 'PK', title: 'Pakistan' },
+      { id: 'US', title: 'United States' },
+      { id: 'UK', title: 'United Kingdom' },
+      { id: 'CA', title: 'Canada' }
     ]
 
     return {
