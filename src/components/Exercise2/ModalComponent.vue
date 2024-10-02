@@ -5,7 +5,7 @@
         <!-- Modal Header -->
         <div class="p-5">
           <div class="flex justify-between items-start">
-            <h3 class="text-2xl font-semibold">Modal Header</h3>
+            <h3 class="text-2xl font-semibold">{{ this.headerText }}</h3>
             <button class="p-1 leading-none">
               <div class="text-xl font-semibold h-6 w-6" @click="cancelModal">
                 <span> x</span>
@@ -85,13 +85,15 @@ export default {
 
     return {
       isVisible: false,
+      headerText: '',
       formData: { name: '', email: '', phone: '', address: '', country: '' },
       country_options: options
     }
   },
   computed: {},
   methods: {
-    open() {
+    open(header, bodyForm) {
+      this.headerText = header
       this.isVisible = true
     },
     cancelModal() {

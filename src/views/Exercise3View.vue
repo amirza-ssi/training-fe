@@ -1,7 +1,12 @@
 <template>
+  <div class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center m-6">
+    <button @click="handleAddColumns">Add Columns</button>
+  </div>
   <data-table :data="this.data1" :cols="this.cols"></data-table>
+  <modal-component ref="modalComponent" @modal-confirm="addUserDetails"></modal-component>
 </template>
 <script>
+import ModalComponent from '@/components/Exercise2/ModalComponent.vue'
 import DataTable from '../components/Exercise3/DataTable.vue'
 export default {
   name: 'Exercise3View',
@@ -25,7 +30,7 @@ export default {
     //   })
   },
   // end lifecycle hooks
-  components: { DataTable },
+  components: { DataTable, ModalComponent },
   data() {
     return {
       data1: [
@@ -2971,8 +2976,9 @@ export default {
         'market_cap',
         'price_change_percentage_24h'
       ]
-
-      //   console.log(this.cols)
+    },
+    handleAddColumns() {
+      this.$refs.modalComponent.open('Add Column')
     }
   }
 }

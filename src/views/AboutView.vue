@@ -28,7 +28,7 @@ export default {
   methods: {
     handleAddUserClick() {
       console.log()
-      this.$refs.modalComponent.open()
+      this.$refs.modalComponent.open('Add User')
     },
     addUserDetails(user) {
       let userObj = toRaw(user)
