@@ -42,7 +42,7 @@ export default {
           val: c
             .split('_')
             .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
-            .reduce((str, c) => str + ' ' + c, '')
+            .reduce((str, c) => str + ' ' + c, '').trim(),
         }
       })
     }
