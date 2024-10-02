@@ -1,7 +1,7 @@
 <template>
   <tr class="text-left">
     <th
-      class="p-1 font-extrabold text-green-600"
+      class="p-2 font-extrabold text-green-600"
       v-for="(col, i) in formatColName"
       :key="col"
       @click="handleSort(col, i)"
@@ -12,7 +12,7 @@
 
   <tr v-for="record in sortData" :key="record.id">
     <!-- <td class="m-10" v-for="(col, i) in columns" :key="i">{{ col != "image" ? record[col] : "<img src='"+ record[col] +"' / ></img>" }}</td> -->
-    <td class="m-10" v-for="(col, i) in columns" :key="i">{{ record[col] }}</td>
+    <td class="p-2" v-for="(col, i) in columns" :key="i">{{ record[col] }}</td>
   </tr>
 </template>
 
