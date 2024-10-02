@@ -7,8 +7,11 @@ export default {
   name: 'Exercise3View',
   props: {},
   // lifecycle hooks of events as given here https://v3.vuejs.org/api/options-lifecycle-hooks.html
+  created() {
+    this.initColumnKeysFromData()
+  },
   mounted() {
-    // TODO: remove to test on live data
+    // TODO: remove to test on live datas
     //  fetch(
     //   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
     // )
@@ -20,7 +23,6 @@ export default {
     //       console.log(row)
     //     })
     //   })
-    this.initColumnKeysFromData()
   },
   // end lifecycle hooks
   components: { DataTable },
@@ -2967,9 +2969,7 @@ export default {
         'symbol',
         'current_price',
         'market_cap',
-        'price_change_percentage_24h',
-        'test',
-        'high_24h'
+        'price_change_percentage_24h'
       ]
 
       //   console.log(this.cols)
