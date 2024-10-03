@@ -14,6 +14,7 @@
           </div>
         </div>
         <!-- Modal Body -->
+        {{ JSON.stringify(this.bodyForm) }}
         <div class="p-6">
           <form>
             <div v-for="(field, i) in bodyForm" v-bind:key="i">
@@ -33,6 +34,15 @@
 
                   <label class="ml-1" for="checkbox">{{ option.key }}</label>
                 </div>
+              </div>
+
+              <div v-if="field.input === 'dropdown'">
+                <dropdown-component
+                  title="Country "
+                  :options="field.options"
+                  @dropdown-response="(r) => (field.value = r)"
+                ></dropdown-component>
+                <span>{{ field.value }}</span>
               </div>
             </div>
 
@@ -57,13 +67,6 @@
               placeholder="Address"
             /> -->
           </form>
-
-          <dropdown-component
-            title="Country "
-            :options="this.country_options"
-            @dropdown-response="(val) => (formData.country = val)"
-          ></dropdown-component>
-          <span>{{ formData.country }}</span>
         </div>
 
         <!-- Modal Footer -->

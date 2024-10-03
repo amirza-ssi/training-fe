@@ -32,7 +32,18 @@ export default {
         { input: 'text', label: 'Name', value: '' },
         { input: 'text', label: 'Email', value: '' },
         { input: 'text', label: 'Phone', value: '' },
-        { input: 'text', label: 'Address', value: '' }
+        { input: 'text', label: 'Address', value: '' },
+        {
+          input: 'dropdown',
+          label: 'Country',
+          value: '',
+          options: [
+            { id: 'PK', title: 'Pakistan' },
+            { id: 'US', title: 'United States' },
+            { id: 'UK', title: 'United Kingdom' },
+            { id: 'CA', title: 'Canada' }
+          ]
+        }
       ]
       this.$refs.modalComponent.open('Add User', formConfig)
 

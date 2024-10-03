@@ -23,13 +23,16 @@
 export default {
   name: 'DropdownComponent',
   props: { title: { type: String }, options: {} },
-  mounted() {},
+  mounted() {
+    console.log(this.options)
+  },
   components: {},
   data() {
     return {
       isOptionVisible: false
     }
   },
+  emits: ['dropdown-response'],
   computed: {},
   methods: {
     handleOptionClick(option) {
