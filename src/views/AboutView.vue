@@ -28,7 +28,12 @@ export default {
   methods: {
     handleAddUserClick() {
       console.log()
-      let formConfig = [{ input: 'text', label: 'Name', value: '' }]
+      let formConfig = [
+        { input: 'text', label: 'Name', value: '' },
+        { input: 'text', label: 'Email', value: '' },
+        { input: 'text', label: 'Phone', value: '' },
+        { input: 'text', label: 'Address', value: '' }
+      ]
       this.$refs.modalComponent.open('Add User', formConfig)
 
       // <input
@@ -38,7 +43,12 @@ export default {
       //       />
     },
     addUserDetails(user) {
-      let userObj = toRaw(user)
+      let userObj = {}
+
+      user.forEach((input) => {
+        console.log(input)
+        userObj[input.label.toLowerCase()] = input.value
+      })
       this.userData.push(userObj)
       console.log(this.userData)
       // console.log(userObj)

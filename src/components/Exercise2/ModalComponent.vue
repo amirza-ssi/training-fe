@@ -36,7 +36,7 @@
               </div>
             </div>
 
-            <input
+            <!-- <input
               class="block my-2 border-2 p-2 rounded-lg min-w-40"
               v-model="formData.name"
               placeholder="Name"
@@ -55,7 +55,7 @@
               class="block my-2 border-2 p-2 rounded-lg min-w-40"
               v-model="formData.address"
               placeholder="Address"
-            />
+            /> -->
           </form>
 
           <dropdown-component
