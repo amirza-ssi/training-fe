@@ -15,8 +15,27 @@
         </div>
         <!-- Modal Body -->
         <div class="p-6">
-          <!-- <p>{{ JSON.stringify(formData) }}</p> -->
           <form>
+            <div v-for="(field, i) in bodyForm" v-bind:key="i">
+              <input
+                v-if="field.input === 'text'"
+                type="text"
+                :placeholder="field.label"
+                v-model="field.value"
+                class="block my-2 border-2 p-2 rounded-lg"
+              />
+
+              <div v-if="field.input === 'checkbox'">
+                <p>{{ field.label }}</p>
+                <div v-for="option in field.options" v-bind:key="option" class="inline-block mr-5">
+                  <input type="checkbox" id="checkbox" :value="option" v-model="option.selected" />
+                  <!-- @change="handleCheckboxChange(option, field)" -->
+
+                  <label class="ml-1" for="checkbox">{{ option.key }}</label>
+                </div>
+              </div>
+            </div>
+
             <input
               class="block my-2 border-2 p-2 rounded-lg min-w-40"
               v-model="formData.name"
@@ -87,27 +106,72 @@ export default {
       isVisible: false,
       headerText: '',
       formData: { name: '', email: '', phone: '', address: '', country: '' },
-      country_options: options
+      country_options: options,
+      bodyForm: []
     }
   },
   computed: {},
   methods: {
     open(header, bodyForm) {
       this.headerText = header
+      this.bodyForm = bodyForm
+      console.log('On modal init: ', this.bodyForm[0])
+
       this.isVisible = true
+
+      this.bodyForm
+        //for all checkbox items
+        .filter((item) => item.input === 'checkbox')
+        .forEach((checkboxItem) =>
+          //map array into object
+          {
+            checkboxItem.options = checkboxItem.options.map((option) => {
+              // {key: field_name , selected: boolean if in val }
+              return { key: option, selected: checkboxItem.value.includes(option) }
+            })
+          }
+        )
     },
     cancelModal() {
       this.isVisible = false
     },
     confirmModal() {
-      this.$emit('modal-confirm', this.formData)
+      this.reverseMapCheckboxData()
+
+      this.$emit('modal-confirm', this.bodyForm)
       this.isVisible = false
       this.formData = this.createEmptyFormData()
-    },
 
+      console.log('On Modal Close: ', this.bodyForm)
+    },
+    reverseMapCheckboxData() {
+      this.bodyForm
+        //for all checkbox items
+        .filter((item) => item.input === 'checkbox')
+        .forEach((checkboxItem) =>
+          //map array into object
+          {
+            checkboxItem.value = checkboxItem.options
+              .filter((o) => o.selected)
+              .reduce((o1, o2) => o1.concat(o2.key), [])
+            checkboxItem.options = checkboxItem.options.reduce((o1, o2) => o1.concat(o2.key), [])
+          }
+        )
+    },
     createEmptyFormData() {
       return { name: '', email: '', phone: '', address: '', country: '' }
     }
+    // handleCheckboxChange(option, field) {
+    //   // console.log(option, field)
+    //   console.log(field.value)
+    //   console.log(field.value.includes(option))
+
+    //   if (field.value.includes(option)) {
+    //     field.value = field.value.filter((val) => val != option)
+    //   } else {
+    //     field.value.push(option)
+    //   }
+    // }
   }
 }
 </script>

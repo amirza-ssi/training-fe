@@ -2,8 +2,8 @@
   <div class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center m-6">
     <button @click="handleAddColumns">Add Columns</button>
   </div>
-  <data-table :data="this.data1" :cols="this.cols"></data-table>
-  <modal-component ref="modalComponent" @modal-confirm="addUserDetails"></modal-component>
+  <data-table :data="this.data1" :cols="this.columnSelected"></data-table>
+  <modal-component ref="modalComponent" @modal-confirm="onModalClose"></modal-component>
 </template>
 <script>
 import ModalComponent from '@/components/Exercise2/ModalComponent.vue'
@@ -2958,27 +2958,46 @@ export default {
           last_updated: '2024-10-01T11:05:38.973Z'
         }
       ],
-      cols: []
-    }
-  },
-  computed: {},
-  methods: {
-    initColumnKeysFromData() {
-      //   var colSet = new Set([])
-      //   data.forEach((row) => (colSet = new Set([...colSet, ...new Set(Object.keys(row))])))
-      //   this.cols = colSet
-
-      this.cols = [
+      columnSelected: [
         'image',
         'name',
         'symbol',
         'current_price',
         'market_cap',
         'price_change_percentage_24h'
-      ]
+      ],
+      columnsData: []
+    }
+  },
+  computed: {},
+  methods: {
+    initColumnKeysFromData() {
+      var colSet = new Set([])
+      this.data1.forEach((row) => (colSet = new Set([...colSet, ...new Set(Object.keys(row))])))
+      this.columnsData = Array.from(colSet)
     },
     handleAddColumns() {
-      this.$refs.modalComponent.open('Add Column')
+      // console.log(this.columnsData)
+      let formObj = [
+        {
+          input: 'checkbox',
+          label: 'Select All',
+          options: this.columnsData,
+          value: this.columnSelected
+        }
+      ]
+
+      console.log('Before modal init', formObj)
+
+      this.$refs.modalComponent.open('Add Column', formObj)
+    },
+
+    onModalClose(formObj) {
+      console.log('Column shown from: ', this.columnSelected)
+
+      this.columnSelected = formObj[0].value
+      console.log(this.columnSelected)
+      console.log(formObj[0].value)
     }
   }
 }

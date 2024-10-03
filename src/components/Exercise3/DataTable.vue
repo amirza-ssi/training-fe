@@ -12,7 +12,7 @@
 
   <tr v-for="record in sortData" :key="record.id">
     <!-- <td class="m-10" v-for="(col, i) in columns" :key="i">{{ col != "image" ? record[col] : "<img src='"+ record[col] +"' / ></img>" }}</td> -->
-    <td class="p-2" v-for="(col, i) in columns" :key="i">{{ record[col] }}</td>
+    <td class="p-2" v-for="(col, i) in cols" :key="i">{{ record[col] }}</td>
   </tr>
 </template>
 
@@ -28,6 +28,12 @@ export default {
       type: Array
     }
   },
+  watch: {
+    cols: function (newVal, oldVal) {
+      // watch it
+      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+    }
+  },
   // lifecycle hooks of events as given here https://v3.vuejs.org/api/options-lifecycle-hooks.html
   mounted() {},
 
@@ -36,7 +42,6 @@ export default {
   components: {},
   data() {
     return {
-      columns: [...this.cols],
       rows: this.data,
       isAscendingSorting: {}
     }
@@ -44,8 +49,7 @@ export default {
   computed: {
     // map column names automatically on state change
     formatColName() {
-      console.log(this.columns)
-      return this.columns.map((c) => {
+      return this.cols.map((c) => {
         return {
           // capitalize
           key: c,
@@ -72,17 +76,13 @@ export default {
   methods: {
     // sort on click of any column heading
     handleSort(column, index) {
-      console.log(column.key)
-      console.log(this.isAscendingSorting[column.key] === 1)
-      //if valuobjecte exists already then set to descending
+      //if value exists already then set to descending
       if (this.isAscendingSorting[column.key] === 1) {
         this.isAscendingSorting[column.key] = 0
       } else {
         this.isAscendingSorting[column.key] = 1
       }
       // default add value as ascending
-
-      console.log(JSON.stringify(this.isAscendingSorting))
     }
   }
 }

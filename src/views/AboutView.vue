@@ -28,7 +28,14 @@ export default {
   methods: {
     handleAddUserClick() {
       console.log()
-      this.$refs.modalComponent.open('Add User')
+      let formConfig = [{ input: 'text', label: 'Name', value: '' }]
+      this.$refs.modalComponent.open('Add User', formConfig)
+
+      // <input
+      //         class="block my-2 border-2 p-2 rounded-lg min-w-40"
+      //         v-model="formData.name"
+      //         placeholder="Name"
+      //       />
     },
     addUserDetails(user) {
       let userObj = toRaw(user)
