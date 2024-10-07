@@ -12,7 +12,10 @@
 
   <tr v-for="record in sortData" :key="record.id">
     <!-- <td class="m-10" v-for="(col, i) in columns" :key="i">{{ col != "image" ? record[col] : "<img src='"+ record[col] +"' / ></img>" }}</td> -->
-    <td class="p-2" v-for="(col, i) in cols" :key="i">{{ record[col] }}</td>
+    <td class="p-2 align-middle" v-for="(col, i) in cols" :key="i">
+      <img class="max-h-12" v-if="col === 'image'" :src="record[col]" />
+      <p v-else>{{ record[col] }}</p>
+    </td>
   </tr>
 </template>
 
