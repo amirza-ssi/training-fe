@@ -160,7 +160,6 @@ export default {
       return { name: '', email: '', phone: '', address: '', country: '' }
     },
     handleDropdownResponse(r, field) {
-      r
       field['value'] = r
     }
     // handleCheckboxChange(option, field) {

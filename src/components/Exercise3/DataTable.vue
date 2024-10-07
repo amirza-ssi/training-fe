@@ -43,9 +43,15 @@ export default {
       isAscendingSorting: {}
     }
   },
+  watch: {
+    data() {
+      console.log(this.data)
+    }
+  },
   computed: {
     // map column names automatically on state change
     formatColName() {
+      if (this.cols === undefined) return []
       return this.cols.map((c) => {
         return {
           // capitalize
