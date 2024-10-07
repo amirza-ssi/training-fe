@@ -1,14 +1,14 @@
 <template>
-  <div
+  <!-- <div
     class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center"
-    v-on:click="handleButtonClick()"
+    @click="handleButtonClick()"
   >
     <button>
       {{ title }}
     </button>
-  </div>
+  </div> -->
 
-  <div class="bg-white rounded min-w-40" :v-if="isOptionVisible">
+  <!-- <div class="bg-white rounded min-w-40" v-show="isOptionVisible">
     <a
       href="#"
       class="block px-4 py-1 text-black"
@@ -17,7 +17,16 @@
       v-on:click="handleOptionClick(option.id)"
       >{{ option.title }}</a
     >
-  </div>
+  </div> -->
+  <label>{{ title }}</label>
+  <select
+    class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center"
+    v-model="selected"
+    @change="handleOptionClick(selected)"
+  >
+    <option disabled value="">Please select one</option>
+    <option v-for="option in options" v-bind:key="option.id">{{ option.title }}</option>
+  </select>
 </template>
 <script>
 export default {
@@ -27,13 +36,15 @@ export default {
   components: {},
   data() {
     return {
-      isOptionVisible: false
+      isOptionVisible: false,
+      selected: ''
     }
   },
   emits: ['dropdown-response'],
   computed: {},
   methods: {
     handleOptionClick(option) {
+      'IN DD: ', option
       this.$emit('dropdown-response', option)
       this.isOptionVisible = false
     },

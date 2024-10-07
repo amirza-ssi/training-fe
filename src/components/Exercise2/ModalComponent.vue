@@ -14,7 +14,6 @@
           </div>
         </div>
         <!-- Modal Body -->
-        {{ JSON.stringify(this.bodyForm) }}
         <div class="p-6">
           <form>
             <div v-for="(field, i) in bodyForm" v-bind:key="i">
@@ -42,7 +41,6 @@
                   :options="field.options"
                   @dropdown-response="(r) => handleDropdownResponse(r, field)"
                 ></dropdown-component>
-                <span>{{ field.value }}</span>
               </div>
             </div>
 
@@ -162,6 +160,7 @@ export default {
       return { name: '', email: '', phone: '', address: '', country: '' }
     },
     handleDropdownResponse(r, field) {
+      r
       field['value'] = r
     }
     // handleCheckboxChange(option, field) {
