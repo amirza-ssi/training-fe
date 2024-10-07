@@ -82,10 +82,14 @@ export default {
       //if value exists already then set to descending
       if (this.isAscendingSorting[column.key] === 1) {
         this.isAscendingSorting[column.key] = 0
-      } else {
+      } else if (this.isAscendingSorting[column.key] === 0) {
         this.isAscendingSorting[column.key] = 1
       }
-      // default add value as ascending
+      // default and for new param add value as ascending
+      else {
+        this.isAscendingSorting = {}
+        this.isAscendingSorting[column.key] = 1
+      }
     }
   }
 }
