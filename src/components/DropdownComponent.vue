@@ -23,9 +23,7 @@
 export default {
   name: 'DropdownComponent',
   props: { title: { type: String }, options: {} },
-  mounted() {
-    console.log(this.options)
-  },
+  mounted() {},
   components: {},
   data() {
     return {

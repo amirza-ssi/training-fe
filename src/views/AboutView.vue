@@ -26,7 +26,6 @@ export default {
   computed: {},
   methods: {
     handleAddUserClick() {
-      console.log()
       let formConfig = [
         { input: 'text', label: 'Name', value: '' },
         { input: 'text', label: 'Email', value: '' },
@@ -56,13 +55,12 @@ export default {
       let userObj = {}
 
       user.forEach((input) => {
-        console.log(input)
         userObj[input.label.toLowerCase()] = input.value
       })
       this.userData.push(userObj)
-      console.log(this.userData)
-      // console.log(userObj)
-      // console.log(toRaw(user))
+
+      //
+      //
     }
   }
 }

@@ -21,11 +21,11 @@ export default {
     //   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
     // )
     //   .then((res) => res.json())
-    //   //   .then((data) => console.log(data))
+    //   //   .then((data) =>
     //   //map data to columns
     //   .then((data) => {
     //     data.forEach((row) => {
-    //       console.log(row)
+    //
     //     })
     //   })
   },
@@ -2977,7 +2977,7 @@ export default {
       this.columnsData = Array.from(colSet)
     },
     handleAddColumns() {
-      // console.log(this.columnsData)
+      //
       let formObj = [
         {
           input: 'checkbox',
@@ -2987,17 +2987,11 @@ export default {
         }
       ]
 
-      console.log('Before modal init', formObj)
-
       this.$refs.modalComponent.open('Add Column', formObj)
     },
 
     onModalClose(formObj) {
-      console.log('Column shown from: ', this.columnSelected)
-
       this.columnSelected = formObj[0].value
-      console.log(this.columnSelected)
-      console.log(formObj[0].value)
     }
   }
 }

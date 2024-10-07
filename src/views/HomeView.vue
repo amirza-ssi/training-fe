@@ -28,9 +28,7 @@ export default {
   },
   computed: {},
   methods: {
-    getDropdownInput(key) {
-      console.log('The value of the key defined is:', key)
-    },
+    getDropdownInput(key) {},
     method2() {},
     method3() {}
   }

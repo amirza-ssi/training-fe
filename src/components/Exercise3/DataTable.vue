@@ -31,7 +31,6 @@ export default {
   watch: {
     cols: function (newVal, oldVal) {
       // watch it
-      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
     }
   },
   // lifecycle hooks of events as given here https://v3.vuejs.org/api/options-lifecycle-hooks.html

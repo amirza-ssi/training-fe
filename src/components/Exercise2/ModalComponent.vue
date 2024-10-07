@@ -118,7 +118,6 @@ export default {
     open(header, bodyForm) {
       this.headerText = header
       this.bodyForm = bodyForm
-      console.log('On modal init: ', this.bodyForm[0])
 
       this.isVisible = true
 
@@ -144,8 +143,6 @@ export default {
       this.$emit('modal-confirm', this.bodyForm)
       this.isVisible = false
       this.formData = this.createEmptyFormData()
-
-      console.log('On Modal Close: ', this.bodyForm)
     },
     reverseMapCheckboxData() {
       this.bodyForm
@@ -168,9 +165,9 @@ export default {
       field['value'] = r
     }
     // handleCheckboxChange(option, field) {
-    //   // console.log(option, field)
-    //   console.log(field.value)
-    //   console.log(field.value.includes(option))
+    //   //
+    //
+    //
 
     //   if (field.value.includes(option)) {
     //     field.value = field.value.filter((val) => val != option)
