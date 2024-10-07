@@ -28,11 +28,6 @@ export default {
       type: Array
     }
   },
-  watch: {
-    cols: function (newVal, oldVal) {
-      // watch it
-    }
-  },
   // lifecycle hooks of events as given here https://v3.vuejs.org/api/options-lifecycle-hooks.html
   mounted() {},
 
