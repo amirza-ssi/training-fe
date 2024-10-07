@@ -8,7 +8,7 @@
     </button>
   </div>
 
-  <div class="bg-white rounded min-w-40" v-if="isOptionVisible">
+  <div class="bg-white rounded min-w-40" :v-if="isOptionVisible">
     <a
       href="#"
       class="block px-4 py-1 text-black"
@@ -40,9 +40,7 @@ export default {
       this.isOptionVisible = false
     },
     handleButtonClick() {
-      // console.log('Before change', this.options)
       this.isOptionVisible = !this.isOptionVisible
-      // console.log('After change', this.isOptionVisible)
     },
     method3() {}
   }

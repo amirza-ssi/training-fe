@@ -40,7 +40,7 @@
                 <dropdown-component
                   title="Country "
                   :options="field.options"
-                  @dropdown-response="(r) => (field.value = r)"
+                  @dropdown-response="(r) => handleDropdownResponse(r, field)"
                 ></dropdown-component>
                 <span>{{ field.value }}</span>
               </div>
@@ -163,6 +163,9 @@ export default {
     },
     createEmptyFormData() {
       return { name: '', email: '', phone: '', address: '', country: '' }
+    },
+    handleDropdownResponse(r, field) {
+      field['value'] = r
     }
     // handleCheckboxChange(option, field) {
     //   // console.log(option, field)
