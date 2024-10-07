@@ -11,7 +11,6 @@
 <script>
 import ModalComponent from '../components/Exercise2/ModalComponent.vue'
 import TableComponent from '../components/Exercise2/TableComponent.vue'
-import { toRaw } from 'vue'
 export default {
   name: 'AboutView',
   props: {},

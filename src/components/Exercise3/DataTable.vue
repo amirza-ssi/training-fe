@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     // sort on click of any column heading
-    handleSort(column, index) {
+    handleSort(column) {
       //if value exists already then set to descending
       if (this.isAscendingSorting[column.key] === 1) {
         this.isAscendingSorting[column.key] = 0
