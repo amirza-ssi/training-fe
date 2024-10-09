@@ -3,9 +3,10 @@
     <div class="fixed inset-0 z-20 flex justify-center items-center text-slate-950">
       <div class="flex flex-col max-w-5xl min-w-96 rounded-lg shadow-lg bg-white border-cyan-300">
         <!-- Modal Header -->
+        {{ bodyForm.value }}
         <div class="p-5">
           <div class="flex justify-between items-start">
-            <h3 class="text-2xl font-semibold">{{ this.headerText }}</h3>
+            <h3 class="text-2xl font-semibold">{{ headerText }}</h3>
             <button class="p-1 leading-none">
               <div class="text-xl font-semibold h-6 w-6" @click="cancelModal">
                 <span> x</span>
@@ -16,7 +17,7 @@
         <!-- Modal Body -->
         <div class="p-6">
           <form>
-            <div v-for="(field, i) in bodyForm" v-bind:key="i">
+            <div v-for="(field, i) in bodyForm.value" v-bind:key="i">
               <input
                 v-if="field.input === 'text'"
                 type="text"
@@ -43,27 +44,6 @@
                 ></DropdownComponent>
               </div>
             </div>
-
-            <!-- <input
-              class="block my-2 border-2 p-2 rounded-lg min-w-40"
-              v-model="formData.name"
-              placeholder="Name"
-            />
-            <input
-              class="block my-2 border-2 p-2 rounded-lg min-w-40"
-              v-model="formData.email"
-              placeholder="Email"
-            />
-            <input
-              class="block my-2 border-2 p-2 rounded-lg min-w-40"
-              v-model="formData.phone"
-              placeholder="Phone"
-            />
-            <input
-              class="block my-2 border-2 p-2 rounded-lg min-w-40"
-              v-model="formData.address"
-              placeholder="Address"
-            /> -->
           </form>
         </div>
 
@@ -86,92 +66,84 @@
     </div>
   </div>
 </template>
-<script>
+<script setup>
+import { ref, reactive } from 'vue'
 import DropdownComponent from '../DropdownComponent.vue'
-export default {
-  name: 'ModalComponent',
-  props: {},
-  // lifecycle hooks of events as given here https://v3.vuejs.org/api/options-lifecycle-hooks.html
-  mounted() {},
-  // end lifecycle hooks
-  components: { DropdownComponent },
-  data() {
-    const options = [
-      { id: 'PK', title: 'Pakistan' },
-      { id: 'US', title: 'United States' },
-      { id: 'UK', title: 'United Kingdom' },
-      { id: 'CA', title: 'Canada' }
-    ]
 
-    return {
-      isVisible: false,
-      headerText: '',
-      formData: { name: '', email: '', phone: '', address: '', country: '' },
-      bodyForm: []
-    }
-  },
-  computed: {},
-  methods: {
-    open(header, bodyForm) {
-      this.headerText = header
-      this.bodyForm = bodyForm
+const options = [
+  { id: 'PK', title: 'Pakistan' },
+  { id: 'US', title: 'United States' },
+  { id: 'UK', title: 'United Kingdom' },
+  { id: 'CA', title: 'Canada' }
+]
 
-      this.isVisible = true
+var isVisible = ref(false)
+var headerText = ref('')
+var formData = reactive({ name: '', email: '', phone: '', address: '', country: '' })
+var bodyForm = reactive([])
+const emit = defineEmits(['confirm'])
 
-      this.bodyForm
-        //for all checkbox items
-        .filter((item) => item.input === 'checkbox')
-        .forEach((checkboxItem) =>
-          //map array into object
-          {
-            checkboxItem.options = checkboxItem.options.map((option) => {
-              // {key: field_name , selected: boolean if in val }
-              return { key: option, selected: checkboxItem.value.includes(option) }
-            })
-          }
-        )
-    },
-    cancelModal() {
-      this.isVisible = false
-    },
-    confirmModal() {
-      this.reverseMapCheckboxData()
+function open(header, body) {
+  headerText.value = header
+  bodyForm.value = body
 
-      this.$emit('confirm', this.bodyForm)
-      this.isVisible = false
-      this.formData = this.createEmptyFormData()
-    },
-    reverseMapCheckboxData() {
-      this.bodyForm
-        //for all checkbox items
-        .filter((item) => item.input === 'checkbox')
-        .forEach((checkboxItem) =>
-          //map array into object
-          {
-            checkboxItem.value = checkboxItem.options
-              .filter((o) => o.selected)
-              .reduce((o1, o2) => o1.concat(o2.key), [])
-            checkboxItem.options = checkboxItem.options.reduce((o1, o2) => o1.concat(o2.key), [])
-          }
-        )
-    },
-    createEmptyFormData() {
-      return { name: '', email: '', phone: '', address: '', country: '' }
-    },
-    handleDropdownResponse(r, field) {
-      field['value'] = r
-    }
-    // handleCheckboxChange(option, field) {
-    //   //
-    //
-    //
+  isVisible.value = true
 
-    //   if (field.value.includes(option)) {
-    //     field.value = field.value.filter((val) => val != option)
-    //   } else {
-    //     field.value.push(option)
-    //   }
-    // }
-  }
+  console.log(bodyForm.value)
+  bodyForm.value
+    //for all checkbox items
+    .filter((item) => item.input === 'checkbox')
+    .forEach((checkboxItem) =>
+      //map array into object
+      {
+        checkboxItem.options = checkboxItem.options.map((option) => {
+          // {key: field_name , selected: boolean if in val }
+          return { key: option, selected: checkboxItem.value.includes(option) }
+        })
+      }
+    )
 }
+defineExpose({ open })
+function cancelModal() {
+  isVisible.value = false
+}
+function confirmModal() {
+  reverseMapCheckboxData()
+
+  emit('confirm', bodyForm.value)
+  isVisible.value = false
+  formData.value = createEmptyFormData()
+}
+
+function reverseMapCheckboxData() {
+  bodyForm.value
+    //for all checkbox items
+    .filter((item) => item.input === 'checkbox')
+    .forEach((checkboxItem) =>
+      //map array into object
+      {
+        checkboxItem.value = checkboxItem.options
+          .filter((o) => o.selected)
+          .reduce((o1, o2) => o1.concat(o2.key), [])
+        checkboxItem.options = checkboxItem.options.reduce((o1, o2) => o1.concat(o2.key), [])
+      }
+    )
+}
+function createEmptyFormData() {
+  return { name: '', email: '', phone: '', address: '', country: '' }
+}
+function handleDropdownResponse(r, field) {
+  field['value'] = r
+}
+// handleCheckboxChange(option, field) {
+//   //
+//
+//
+
+//   if (field.value.includes(option)) {
+//     field.value = field.value.filter((val) => val != option)
+//   } else {
+//     field.value.push(option)
+//   }
+// }
 </script>
