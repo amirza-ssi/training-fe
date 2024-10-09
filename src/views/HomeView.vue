@@ -1,9 +1,9 @@
 <template>
-  <dropdown-component
+  <DropdownComponent
     :title="this.dropdownTitle"
     :options="this.dropdownOptions"
-    @dropdown-response="getDropdownInput"
-  ></dropdown-component>
+    confirm="getDropdownInput"
+  ></DropdownComponent>
 </template>
 <script>
 import DropdownComponent from '../components/DropdownComponent.vue'
@@ -27,10 +27,6 @@ export default {
     }
   },
   computed: {},
-  methods: {
-    getDropdownInput(key) {},
-    method2() {},
-    method3() {}
-  }
+  methods: {}
 }
 </script>

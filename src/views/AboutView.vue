@@ -3,14 +3,14 @@
     <div class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center m-6">
       <button @click="handleAddUserClick">Add User</button>
     </div>
-    <data-table :data="this.userData" :cols="this.dataColumns"></data-table>
+    <DataTable :data="this.userData" :cols="this.dataColumns"></DataTable>
   </div>
-  <modal-component ref="modalComponent" @modal-confirm="addUserDetails"></modal-component>
+  <ModalComponent ref="modalComponent" @confirm="addUserDetails"></ModalComponent>
 </template>
 
 <script>
+import ModalComponent from '@/components/Exercise2/ModalComponent.vue'
 import DataTable from '@/components/Exercise3/DataTable.vue'
-import ModalComponent from '../components/Exercise2/ModalComponent.vue'
 export default {
   name: 'AboutView',
   props: {},

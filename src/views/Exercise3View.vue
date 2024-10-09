@@ -2,12 +2,12 @@
   <div class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center m-6">
     <button @click="handleAddColumns">Add Columns</button>
   </div>
-  <data-table :data="this.data1" :cols="this.columnSelected"></data-table>
-  <modal-component ref="modalComponent" @modal-confirm="onModalClose"></modal-component>
+  <DataTable :data="this.data1" :cols="this.columnSelected"></DataTable>
+  <ModalComponent ref="modalComponent" @confirm="onModalClose"></ModalComponent>
 </template>
 <script>
+import DataTable from '@/components/Exercise3/DataTable.vue'
 import ModalComponent from '@/components/Exercise2/ModalComponent.vue'
-import DataTable from '../components/Exercise3/DataTable.vue'
 export default {
   name: 'Exercise3View',
   props: {},

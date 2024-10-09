@@ -36,11 +36,11 @@
               </div>
 
               <div v-if="field.input === 'dropdown'">
-                <dropdown-component
+                <DropdownComponent
                   title="Country "
                   :options="field.options"
-                  @dropdown-response="(r) => handleDropdownResponse(r, field)"
-                ></dropdown-component>
+                  @confirm="(r) => handleDropdownResponse(r, field)"
+                ></DropdownComponent>
               </div>
             </div>
 
@@ -137,7 +137,7 @@ export default {
     confirmModal() {
       this.reverseMapCheckboxData()
 
-      this.$emit('modal-confirm', this.bodyForm)
+      this.$emit('confirm', this.bodyForm)
       this.isVisible = false
       this.formData = this.createEmptyFormData()
     },

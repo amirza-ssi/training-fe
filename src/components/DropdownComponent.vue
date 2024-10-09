@@ -42,12 +42,12 @@ export default {
       selected: ''
     }
   },
-  emits: ['dropdown-response'],
+  emits: ['confirm'],
   computed: {},
   methods: {
     handleOptionClick(option) {
       'IN DD: ', option
-      this.$emit('dropdown-response', option)
+      this.$emit('confirm', option)
       this.isOptionVisible = false
     },
     handleButtonClick() {
