@@ -19,78 +19,53 @@
   </tr>
 </template>
 
-<script>
+<script setup>
 import { orderBy } from 'lodash'
-export default {
-  name: 'DataTable',
-  props: {
-    data: {
-      type: Array
-    },
-    cols: {
-      type: Array
-    }
-  },
-  // lifecycle hooks of events as given here https://v3.vuejs.org/api/options-lifecycle-hooks.html
-  mounted() {},
+import { computed, onMounted, reactive } from 'vue'
+const props = defineProps({ data: Array, cols: Array })
 
-  created() {},
-  // end lifecycle hooks
-  components: {},
-  data() {
+onMounted(() => {
+  rows.value = props.data
+})
+
+var rows = reactive([])
+var isAscendingSorting = reactive({ a: 'a' })
+
+// map column names automatically on state change
+const formatColName = computed(() => {
+  if (props.cols === undefined) return []
+  return props.cols.map((c) => {
     return {
-      rows: this.data,
-      isAscendingSorting: {}
+      // capitalize
+      key: c,
+      val: c
+        .split('_')
+        .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
+        .reduce((str, c) => str + ' ' + c, '')
+        .trim()
     }
-  },
-  watch: {
-    data() {
-      console.log(this.data)
-    }
-  },
-  computed: {
-    // map column names automatically on state change
-    formatColName() {
-      if (this.cols === undefined) return []
-      return this.cols.map((c) => {
-        return {
-          // capitalize
-          key: c,
-          val: c
-            .split('_')
-            .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
-            .reduce((str, c) => str + ' ' + c, '')
-            .trim()
-        }
-      })
-    },
+  })
+})
 
-    //sort data automatically on data or sorting change
-    sortData() {
-      return orderBy(
-        this.rows,
-        Object.keys(this.isAscendingSorting),
-        Object.values(this.isAscendingSorting).map((e) => (e === 1 ? 'asc' : 'desc'))
-      )
+//sort data automatically on data or sorting change
+const sortData = computed(() => {
+  return orderBy(
+    rows.value,
+    Object.keys(isAscendingSorting.value || {}),
+    Object.values(isAscendingSorting.value || {}).map((e) => (e === 1 ? 'asc' : 'desc'))
+  )
+})
 
-      // return this.rows
-    }
-  },
-  methods: {
-    // sort on click of any column heading
-    handleSort(column) {
-      //if value exists already then set to descending
-      if (this.isAscendingSorting[column.key] === 1) {
-        this.isAscendingSorting[column.key] = 0
-      } else if (this.isAscendingSorting[column.key] === 0) {
-        this.isAscendingSorting[column.key] = 1
-      }
-      // default and for new param add value as ascending
-      else {
-        this.isAscendingSorting = {}
-        this.isAscendingSorting[column.key] = 1
-      }
-    }
+function handleSort(column) {
+  if (!isAscendingSorting.value || !isAscendingSorting.value[column.key]) {
+    isAscendingSorting.value = {}
+    isAscendingSorting.value[column.key] = 1
+  }
+  //if value exists already then set to descending
+  else if (isAscendingSorting.value[column.key] === 1) {
+    isAscendingSorting.value[column.key] = 0
+  } else if (isAscendingSorting.value[column.key] === 0) {
+    isAscendingSorting.value[column.key] = 1
   }
 }
 </script>
