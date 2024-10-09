@@ -30,30 +30,21 @@
     </option>
   </select>
 </template>
-<script>
-export default {
-  name: 'DropdownComponent',
-  props: { title: { type: String }, options: {} },
-  mounted() {},
-  components: {},
-  data() {
-    return {
-      isOptionVisible: false,
-      selected: ''
-    }
-  },
-  emits: ['confirm'],
-  computed: {},
-  methods: {
-    handleOptionClick(option) {
-      'IN DD: ', option
-      this.$emit('confirm', option)
-      this.isOptionVisible = false
-    },
-    handleButtonClick() {
-      this.isOptionVisible = !this.isOptionVisible
-    },
-    method3() {}
-  }
+
+<script setup>
+import { ref } from 'vue'
+
+defineProps({ title: { type: String }, options: {} })
+const emit = defineEmits(['confirm'])
+
+var isOptionVisible = ref(false)
+var selected = ref('')
+
+function handleOptionClick(option) {
+  emit('confirm', option)
+  isOptionVisible.value = false
+}
+function handleButtonClick() {
+  isOptionVisible.value = !this.isOptionVisible
 }
 </script>
