@@ -107,7 +107,6 @@ export default {
       isVisible: false,
       headerText: '',
       formData: { name: '', email: '', phone: '', address: '', country: '' },
-      country_options: options,
       bodyForm: []
     }
   },

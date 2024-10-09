@@ -1,7 +1,7 @@
 <template>
   <dropdown-component
-    :title="this.dropdown_title"
-    :options="this.dropdown_options"
+    :title="this.dropdownTitle"
+    :options="this.dropdownOptions"
     @dropdown-response="getDropdownInput"
   ></dropdown-component>
 </template>
@@ -22,8 +22,8 @@ export default {
     ]
 
     return {
-      dropdown_title: 'Dropdown Title Test',
-      dropdown_options: options
+      dropdownTitle: 'Dropdown Title Test',
+      dropdownOptions: options
     }
   },
   computed: {},
