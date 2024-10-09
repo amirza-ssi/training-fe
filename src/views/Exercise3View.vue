@@ -16,18 +16,13 @@ export default {
     this.initColumnKeysFromData()
   },
   mounted() {
-    // TODO: remove to test on live datas
-    //  fetch(
-    //   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-    // )
-    //   .then((res) => res.json())
-    //   //   .then((data) =>
-    //   //map data to columns
-    //   .then((data) => {
-    //     data.forEach((row) => {
-    //
-    //     })
-    //   })
+    fetch(
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+    )
+      .then((res) => res.json())
+      //   .then((data) =>
+      //map data to columns
+      .then((data) => (this.data1 = data))
   },
   // end lifecycle hooks
   components: { DataTable, ModalComponent },

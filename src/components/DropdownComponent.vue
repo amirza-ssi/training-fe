@@ -24,8 +24,10 @@
     v-model="selected"
     @change="handleOptionClick(selected)"
   >
-    <option disabled value="">Please select one</option>
-    <option v-for="option in options" v-bind:key="option.id">{{ option.title }}</option>
+    <option class="bg-white text-gray-700x" disabled value="">Please select one</option>
+    <option class="bg-white text-gray-700x" v-for="option in options" v-bind:key="option.id">
+      {{ option.title }}
+    </option>
   </select>
 </template>
 <script>
