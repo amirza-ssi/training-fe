@@ -89,7 +89,6 @@ function open(header, body) {
 
   isVisible.value = true
 
-  console.log(bodyForm.value)
   bodyForm.value
     //for all checkbox items
     .filter((item) => item.input === 'checkbox')
@@ -134,6 +133,8 @@ function createEmptyFormData() {
 }
 function handleDropdownResponse(r, field) {
   field['value'] = r
+
+  console.log('handeldropdownresponse end')
 }
 // handleCheckboxChange(option, field) {
 //   //
