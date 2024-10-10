@@ -15,7 +15,7 @@
       <!-- <td class="m-10" v-for="(col, i) in columns" :key="i">{{ col != "image" ? record[col] : "<img src='"+ record[col] +"' / ></img>" }}</td> -->
       <td class="p-2 align-middle" v-for="(col, i) in cols" :key="i">
         <img class="max-h-12" v-if="col === 'image'" :src="record[col]" />
-        <p v-else>{{ record[col] }}</p>
+        <p v-else>{{ formatData(record[col]) }}</p>
       </td>
     </tr>
   </div>
@@ -61,6 +61,23 @@ const sortData = computed(() => {
     Object.values(isAscendingSorting.value || {}).map((e) => (e === 1 ? 'asc' : 'desc'))
   )
 })
+
+function formatData(data) {
+  if (isFloat(data)) {
+    return parseFloat(data).toFixed(4)
+  } else if (isNumber(data)) {
+    return data.toLocaleString()
+  }
+  return data
+}
+
+function isFloat(n) {
+  return parseFloat(n) === n && !Number.isInteger(n)
+}
+
+function isNumber(n) {
+  return Number.isInteger(n)
+}
 
 function handleSort(column) {
   if (!isAscendingSorting.value || !isAscendingSorting.value[column.key]) {
