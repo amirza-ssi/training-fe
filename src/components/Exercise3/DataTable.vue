@@ -1,22 +1,24 @@
 <template>
-  <tr class="text-left">
-    <th
-      class="p-2 font-extrabold text-green-600"
-      v-for="(col, i) in formatColName"
-      :key="col"
-      @click="handleSort(col, i)"
-    >
-      {{ col.val }}
-    </th>
-  </tr>
+  <div class="overflow-auto h-[60vh]">
+    <tr class="text-left sticky top-0 bg-[#181818]">
+      <th
+        class="p-2 font-extrabold text-green-600"
+        v-for="(col, i) in formatColName"
+        :key="col"
+        @click="handleSort(col, i)"
+      >
+        {{ col.val }}
+      </th>
+    </tr>
 
-  <tr v-for="record in sortData" :key="record.id">
-    <!-- <td class="m-10" v-for="(col, i) in columns" :key="i">{{ col != "image" ? record[col] : "<img src='"+ record[col] +"' / ></img>" }}</td> -->
-    <td class="p-2 align-middle" v-for="(col, i) in cols" :key="i">
-      <img class="max-h-12" v-if="col === 'image'" :src="record[col]" />
-      <p v-else>{{ record[col] }}</p>
-    </td>
-  </tr>
+    <tr v-for="record in sortData" :key="record.id">
+      <!-- <td class="m-10" v-for="(col, i) in columns" :key="i">{{ col != "image" ? record[col] : "<img src='"+ record[col] +"' / ></img>" }}</td> -->
+      <td class="p-2 align-middle" v-for="(col, i) in cols" :key="i">
+        <img class="max-h-12" v-if="col === 'image'" :src="record[col]" />
+        <p v-else>{{ record[col] }}</p>
+      </td>
+    </tr>
+  </div>
 </template>
 
 <script setup>
