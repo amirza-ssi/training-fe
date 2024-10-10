@@ -21,7 +21,7 @@
 
 <script setup>
 import { orderBy } from 'lodash'
-import { computed, onMounted, reactive } from 'vue'
+import { computed, onMounted, reactive, watch } from 'vue'
 const props = defineProps({ data: Array, cols: Array })
 
 onMounted(() => {
@@ -30,6 +30,10 @@ onMounted(() => {
 
 var rows = reactive([])
 var isAscendingSorting = reactive({ a: 'a' })
+
+watch(props, (p2, p1) => {
+  rows.value = p2.data
+})
 
 // map column names automatically on state change
 const formatColName = computed(() => {
