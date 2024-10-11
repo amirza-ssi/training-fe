@@ -9,7 +9,7 @@
 <script setup>
 import DataTable from '@/components/Exercise3/DataTable.vue'
 import ModalComponent from '@/components/Exercise2/ModalComponent.vue'
-import { ref, reactive, onMounted, useTemplateRef } from 'vue'
+import { ref, reactive, onMounted, useTemplateRef, watch } from 'vue'
 
 var data1 = reactive([])
 var columnSelected = ref([
@@ -21,6 +21,10 @@ var columnSelected = ref([
   'price_change_percentage_24h'
 ])
 var columnsData = ref([])
+
+watch(columnSelected, () => {
+  localStorage.setItem('ex3_columns', JSON.stringify(columnSelected.value))
+})
 
 const modalComponent = useTemplateRef('modalComponent')
 
@@ -34,9 +38,11 @@ onMounted(() => {
     //map data to columns
     .then((data) => {
       data1.value = data
-      console.log(data)
     })
-    .then(() => initColumnKeysFromData())
+    .then(() => {
+      initColumnKeysFromData()
+      loadStoredColumns()
+    })
 })
 
 function initColumnKeysFromData() {
@@ -44,6 +50,13 @@ function initColumnKeysFromData() {
   data1.value.forEach((row) => (colSet = new Set([...colSet, ...new Set(Object.keys(row))])))
   columnsData.value = Array.from(colSet)
 }
+function loadStoredColumns() {
+  let storedColumns = JSON.parse(localStorage.getItem('ex3_columns'))
+  if (storedColumns !== null) {
+    columnSelected.value = storedColumns
+  }
+}
+
 function handleAddColumns() {
   //
   let formObj = [
