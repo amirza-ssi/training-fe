@@ -1,9 +1,7 @@
 <template>
-  <DropdownComponent
-    :title="dropdownTitle"
-    :options="options"
-    @confirm="getDropdownInput"
-  ></DropdownComponent>
+  <DropdownComponent :title="dropdownTitle" :options="options" @confirm="getDropdownInput"
+    >{{ dropdownTitle }}
+  </DropdownComponent>
 </template>
 <script setup>
 import { ref } from 'vue'

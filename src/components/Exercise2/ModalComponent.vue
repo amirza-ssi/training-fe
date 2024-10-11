@@ -41,7 +41,9 @@
                   title="Country "
                   :options="field.options"
                   @confirm="(r) => handleDropdownResponse(r, field)"
-                ></DropdownComponent>
+                >
+                  {{ field.label }}
+                </DropdownComponent>
               </div>
             </div>
           </form>

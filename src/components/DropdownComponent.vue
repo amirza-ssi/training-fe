@@ -3,7 +3,7 @@
     @click.prevent="handleButtonClick()"
     class="block h-8 w-40 rounded overflow-hidden bg-green-500 text-center"
   >
-    {{ title }}
+    <slot></slot>
   </button>
 
   <div class="bg-white rounded min-w-40" v-if="isOptionVisible">
