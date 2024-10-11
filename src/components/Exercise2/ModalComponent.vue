@@ -1,6 +1,8 @@
 <template>
   <div v-if="isVisible">
-    <div class="fixed inset-0 z-20 flex justify-center items-center text-slate-950">
+    <div
+      class="my-5 py-5 fixed inset-0 z-20 flex justify-center items-center overflow-auto text-slate-950"
+    >
       <div class="flex flex-col max-w-5xl min-w-96 rounded-lg shadow-lg bg-white border-cyan-300">
         <!-- Modal Header -->
         <div class="p-5">
@@ -27,11 +29,20 @@
 
               <div v-if="field.input === 'checkbox'">
                 <p>{{ field.label }}</p>
-                <div v-for="option in field.options" v-bind:key="option" class="inline-block mr-5">
-                  <input type="checkbox" id="checkbox" :value="option" v-model="option.selected" />
-                  <!-- @change="handleCheckboxChange(option, field)" -->
+                <div class="grid grid-cols-2 py-2">
+                  <div v-for="option in field.options" v-bind:key="option" class="mr-5 mb-2">
+                    <!-- @change="handleCheckboxChange(option, field)" -->
 
-                  <label class="ml-1" for="checkbox">{{ formatColName(option.key) }}</label>
+                    <label class="ml-1" for="checkbox">
+                      <input
+                        type="checkbox"
+                        id="checkbox"
+                        :value="option"
+                        v-model="option.selected"
+                        class=""
+                      />{{ formatColName(option.key) }}
+                    </label>
+                  </div>
                 </div>
               </div>
 
