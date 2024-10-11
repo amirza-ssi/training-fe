@@ -33,10 +33,10 @@
                   <div v-for="option in field.options" v-bind:key="option" class="mr-5 mb-2">
                     <!-- @change="handleCheckboxChange(option, field)" -->
 
-                    <label class="ml-1" for="checkbox">
+                    <label class="ml-1">
                       <input
                         type="checkbox"
-                        id="checkbox"
+                        :id="option.key"
                         :value="option"
                         v-model="option.selected"
                         class=""
