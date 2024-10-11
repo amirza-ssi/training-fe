@@ -39,7 +39,7 @@
                         :id="option.key"
                         :value="option"
                         v-model="option.selected"
-                        class=""
+                        class="m-2"
                       />{{ formatColName(option.key) }}
                     </label>
                   </div>
